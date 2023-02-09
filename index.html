@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Grid</title>
+    <title>remote calculator</title>
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
@@ -40,7 +40,7 @@
             <div class="col">
               <input
                 type="text"
-                class="form-control fs-1 fw-bold text-end border-1 bg-light shadow-none" id="intext"
+                class="form-control fs-1 fw-medium text-end border-1 bg-light shadow-none" id="intext"
                 />
             </div>
           </div>
@@ -105,7 +105,7 @@
             <div class="col-5">
               <div class="dropdown">
                 <button class="btn d-flex align-items-center border-0 " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="./incos/function.png" alt="" height="20px" class="mx-1">
+                  <img src="./icons/function.png" alt="" height="20px" class="mx-1">
                   Function
                  <img src="./icons/down-arrow.png" alt="" width="18px" class="mx-1">
                 </button>
@@ -160,28 +160,28 @@
             <div class="btn col-2 p-2   shadow     btn-light"  >
               exp
             </div>
-            <div class="btn col-2 p-2    shadow    btn-light"  >
+            <div class="btn col-2 p-2    shadow    btn-light" id="mod">
              mod
             </div>
           </div>
   
           <div class="row   mt-1 gap-1 justify-content-center">
             <div class="btn col-2 p-2  2nd-btn-1   shadow 2nd-btn-toggle   btn-light" id="2sqrt">
-              <sup>2</sup>&#8730x
+              <sup>2</sup>&#8730;x
             </div>
             <div class="btn col-2 p-2  2nd-btn-2   shadow d-none 2nd-btn-toggle  btn-light" id="3sqrt">
-              <sup>3</sup>&#8730x
+              <sup>3</sup>&#8730;x
             </div>
-            <div class="btn col-2 p-2    shadow    btn-light" id="(">
+            <div class="btn col-2 p-2    shadow arith-btn   btn-light" id="(">
               (
             </div>
-            <div class="btn col-2 p-2   shadow     btn-light" id=")">
+            <div class="btn col-2 p-2   shadow  arith-btn   btn-light" id=")">
               )
             </div>
             <div class="btn col-2 p-2  shadow      btn-light" id="fact"  >
              n!
             </div>
-            <div class="btn col-2 p-2  shadow      btn-light" id="/"  >
+            <div class="btn col-2 p-2  shadow  arith-btn    btn-light" id="/"  >
               <img src="./icons/divide.png" alt="divide" width="25px">
             </div>
           </div>
@@ -202,7 +202,7 @@
             <div class="btn num-btn col-2 p-2   shadow     btn-light fw-bold" id="9"  >
              9
             </div>
-            <div class="btn col-2 p-2   shadow     btn-light" id="*"  >
+            <div class="btn col-2 p-2   shadow arith-btn    btn-light" id="*"  >
              X
             </div>
           </div>
@@ -223,7 +223,7 @@
             <div class="btn num-btn col-2 p-2   shadow     btn-light fw-bold" id="6"  >
               6
             </div>
-            <div class="btn col-2 p-2  shadow     btn-light" id="-"  >
+            <div class="btn col-2 p-2  shadow  arith-btn   btn-light" id="-"  >
               -
             </div>
           </div>
@@ -244,7 +244,7 @@
             <div class="btn num-btn col-2 p-2   shadow     btn-light fw-bold" id="3"  >
               3
             </div>
-            <div class="btn col-2 p-2  shadow      btn-light" id="+"  >
+            <div class="btn col-2 p-2  shadow arith-btn     btn-light" id="+"  >
              +
             </div>
           </div>

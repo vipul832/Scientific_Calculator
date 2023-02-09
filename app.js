@@ -6,12 +6,29 @@ const numBtn = document.querySelectorAll(".num-btn");
 
 let secondBtn = document.getElementsByClassName("2nd-btn-toggle");
 
+const arithBtn = document.getElementsByClassName("arith-btn");
+
 let result = 0;
 
 //add number in input text
 for (num of numBtn) {
   num.addEventListener("click", (e) => {
     intext.value += e.target.id;
+  });
+}
+
+//arithmatic operator
+
+for (arith of arithBtn) {
+  arith.addEventListener("click", (e) => {
+    if (e.target.id == ".") {
+      if (flag == 0) {
+        intext.value += e.target.id;
+        flag++;
+      }
+    } else {
+      intext.value += e.target.id;
+    }
   });
 }
 
@@ -33,26 +50,11 @@ for (item of btn) {
           }
         });
         break;
-      case "-":
-        intext.value += btnId;
-        break;
-      case "+":
-        intext.value += btnId;
-        break;
-      case "/":
-        intext.value += btnId;
-        break;
-      case "*":
-        intext.value += btnId;
-        break;
-      case "(":
-        intext.value += btnId;
-        break;
-      case ")":
-        intext.value += btnId;
-        break;
       case "pi":
         intext.value += "π";
+        break;
+      case "mod":
+        intext.value += "%";
         break;
       case "x2":
         let temp = intext.value;
@@ -61,11 +63,11 @@ for (item of btn) {
         break;
       case "2sqrt":
         let sq = intext.value;
-
+        intext.value += "sqrt";
+        result = Math.sqrt(sq);
         break;
       case "10rx":
         intext.value += "10^";
-        break;
         break;
       case "log":
         intext.value += "log";
@@ -108,6 +110,8 @@ for (item of btn) {
           let num = str.match(/(\d+)/);
           let logvalue = Math.log10(num[0]);
           intext.value = logvalue * 2.303;
+        } else if (intext.value.includes("%")) {
+          confirm.log();
         } else if (
           intext.value.includes("+") ||
           intext.value.includes("-") ||
@@ -117,6 +121,8 @@ for (item of btn) {
           solution(intext.value);
           intext.value = result;
           result = 0;
+        } else {
+          intext.value = result;
         }
         break;
     }
