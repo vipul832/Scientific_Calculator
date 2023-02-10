@@ -4,11 +4,31 @@ const btn = document.querySelectorAll(".btn");
 
 const numBtn = document.querySelectorAll(".num-btn");
 
-let secondBtn = document.getElementsByClassName("2nd-btn-toggle");
+const secondBtn = document.getElementsByClassName("2nd-btn-toggle");
+
+const secondTrigo = document.getElementsByClassName("trigono-btn");
+
+const secondTrigoH = document.getElementsByClassName("trigono-h-btn");
+
+const secondTrigoHinv = document.getElementsByClassName("trigono-h-inv");
 
 const arithBtn = document.getElementsByClassName("arith-btn");
 
+const unit_text = document.getElementById("unit");
+
+const tbtn = document.getElementsByClassName("t-btn");
+
 let result = 0;
+
+const obj = { deg: "true", rad: "false", grad: "false" };
+
+//trigonometry
+
+for (t of tbtn) {
+  t.addEventListener("click", (e) => {
+    intext.value += e.target.id;
+  });
+}
 
 //add number in input text
 for (num of numBtn) {
@@ -21,14 +41,7 @@ for (num of numBtn) {
 
 for (arith of arithBtn) {
   arith.addEventListener("click", (e) => {
-    if (e.target.id == ".") {
-      if (flag == 0) {
-        intext.value += e.target.id;
-        flag++;
-      }
-    } else {
-      intext.value += e.target.id;
-    }
+    intext.value += e.target.id;
   });
 }
 
@@ -42,18 +55,23 @@ for (item of btn) {
       case "2nd":
         let secBtn1 = "2nd-btn-1";
         let secBtn2 = "d-none";
-        Array.from(secondBtn).map((btn) => {
-          if (btn.classList.contains(secBtn1)) {
-            btn.classList.toggle(secBtn2);
-          } else {
-            btn.classList.toggle(secBtn2);
-          }
-        });
+        toggleBtn(secondBtn, secBtn1, secBtn2);
+        break;
+      case "second-fn-Trigono":
+        let setbtn1 = "trigo-btn-1";
+        let setbtn2 = "d-none";
+        toggleBtn(secondTrigo, setbtn1, setbtn2);
+        break;
+      case "hyp":
+        let shbtn1 = "trigono-h-btn";
+        let shbtn2 = "d-none";
+        toggleBtn(secondTrigoH, shbtn1, shbtn2);
         break;
       case "pi":
         intext.value += "π";
         break;
       case "mod":
+        var m = intext.value;
         intext.value += "%";
         break;
       case "x2":
@@ -68,6 +86,9 @@ for (item of btn) {
         break;
       case "10rx":
         intext.value += "10^";
+        break;
+      case "unit":
+        check_unit();
         break;
       case "log":
         intext.value += "log";
@@ -111,7 +132,8 @@ for (item of btn) {
           let logvalue = Math.log10(num[0]);
           intext.value = logvalue * 2.303;
         } else if (intext.value.includes("%")) {
-          confirm.log();
+          let n = parseInt(intext.value.slice(-1));
+          console.log(m, n);
         } else if (
           intext.value.includes("+") ||
           intext.value.includes("-") ||
@@ -121,7 +143,10 @@ for (item of btn) {
           solution(intext.value);
           intext.value = result;
           result = 0;
+        } else if (trigoprator.includes(intext.value.slice(0, 3))) {
+          trigohandle(intext.value);
         } else {
+          console.log("last");
           intext.value = result;
         }
         break;
@@ -130,10 +155,10 @@ for (item of btn) {
 }
 
 function solution(expression) {
-  var stackarr = [];
+  let stackarr = [];
 
   // Variable topp initialized with -1
-  var topp = -1;
+  let topp = -1;
 
   // Push function for pushing
   // elements inside stack
@@ -155,10 +180,10 @@ function solution(expression) {
 
   function InfixtoPostfix() {
     // Postfix array created
-    var postfix = [];
-    var temp = 0;
+    let postfix = [];
+    let temp = 0;
     push("@");
-    var infixval = expression;
+    let infixval = expression;
     console.log(infixval);
     // Iterate on infix string
     for (let i = 0; i < infixval.length; i++) {
@@ -286,4 +311,74 @@ function factorial(newinput) {
     f--;
   }
   return ans;
+}
+
+//toogle btn
+
+function toggleBtn(btnarray, btn1, btn2) {
+  Array.from(btnarray).map((btn) => {
+    if (btn.classList.contains(btn1)) {
+      btn.classList.toggle(btn2);
+    } else {
+      btn.classList.toggle(btn2);
+    }
+  });
+}
+
+//check unit
+
+function check_unit() {
+  if (obj.deg == "true") {
+    obj.deg = "false";
+    unit_text.innerHTML = "RAD";
+    obj.rad = "true";
+    obj.grad = "false";
+  } else if (obj.rad == "true") {
+    obj.rad = "false";
+    unit_text.innerHTML = "GRAD";
+    obj.deg = "false";
+    obj.grad = "true";
+  } else if (obj.grad == "true") {
+    obj.grad = "false";
+    unit_text.innerHTML = "DEG";
+    obj.deg = "true";
+    obj.grad = "false";
+  }
+}
+
+const trigoprator = [
+  "sin",
+  "sin-in",
+  "sin-h",
+  "sin-h-in",
+  "cos",
+  "cos-in",
+  "cos-h",
+  "cos-h-in",
+  "tan",
+  "tan-in",
+  "tan-h",
+  "tan-h-in",
+  "sec",
+  "sec-in",
+  "sec-h",
+  "sec-h-in",
+  "cosec",
+  "cosec-in",
+  "cosec-h",
+  "cosec-h-in",
+  "cot",
+  "cot-in",
+  "cot-h",
+  "cot-h-in",
+];
+
+function trigohandle(inputText) {
+  let str = intext.value;
+  let num = str.match(/(\d+)/);
+  let value = num[0];
+  if (obj["deg"] == "true") {
+    value = value * 0.0174533;
+    console.log(value);
+  }
 }
