@@ -20,6 +20,10 @@ const tbtn = document.getElementsByClassName("t-btn");
 
 let result = 0;
 
+let flag_trig = false,
+  flag_hyp = false,
+  flag_hyp1 = false;
+
 const obj = { deg: "true", rad: "false", grad: "false" };
 
 //trigonometry
@@ -37,6 +41,12 @@ for (num of numBtn) {
   });
 }
 
+//btn color change handler
+
+function btnColorHandler(e) {
+  e.classList.toggle("bg-primary");
+}
+
 //arithmatic operator
 
 for (arith of arithBtn) {
@@ -45,7 +55,71 @@ for (arith of arithBtn) {
   });
 }
 
-let flag_trig = false;
+//second btn status
+function secondStatus(statue) {
+  if (statue == false) {
+    flag_trig = true;
+  } else {
+    flag_trig = false;
+  }
+
+  if (flag_hyp == true) {
+    return;
+  }
+
+  if (flag_hyp1 == true) {
+    return;
+  }
+
+  let setbtn1 = "trigo-btn-1";
+  let setbtn2 = "d-none";
+  Array.from(secondTrigo).map((btn) => {
+    if (btn.classList.contains(setbtn1)) {
+      btn.classList.toggle(setbtn2);
+    } else {
+      btn.classList.toggle(setbtn2);
+    }
+  });
+}
+
+//hyp status
+function hypstatus(statue) {
+  if (flag_hyp1 == false) {
+    flag_hyp1 = true;
+  } else {
+    flag_hyp1 = false;
+  }
+
+  if (flag_trig == true) {
+    if (flag_hyp == false) {
+      flag_hyp = true;
+    } else {
+      flag_hyp = false;
+    }
+    let shbtn1 = "trigono-h-inv";
+    let shbtn2 = "d-none";
+    Array.from(secondTrigoHinv).map((btn) => {
+      if (btn.classList.contains(shbtn1)) {
+        btn.classList.toggle(shbtn2);
+      } else {
+        btn.classList.toggle(shbtn2);
+      }
+    });
+  } else {
+    flag_hyp = false;
+    let shbtn1 = "trigono-h-btn";
+    let shbtn2 = "d-none";
+    Array.from(secondTrigoH).map((btn) => {
+      if (btn.classList.contains(shbtn1)) {
+        btn.classList.toggle(shbtn2);
+      } else {
+        btn.classList.toggle(shbtn2);
+      }
+    });
+  }
+}
+
+// main loop
 
 for (item of btn) {
   item.addEventListener("click", (e) => {
@@ -55,6 +129,7 @@ for (item of btn) {
         intext.value = "";
         break;
       case "2nd":
+        btnColorHandler(e.target);
         let secBtn1 = "2nd-btn-1";
         let secBtn2 = "d-none";
         Array.from(secondBtn).map((btn) => {
@@ -66,50 +141,63 @@ for (item of btn) {
         });
         break;
       case "second-fn-Trigono":
-        let setbtn1 = "trigo-btn-1";
-        let setbtn2 = "d-none";
-        console.log(flag_trig);
-        Array.from(secondTrigo).map((btn) => {
-          if (btn.classList.contains(setbtn1)) {
-            btn.classList.toggle(setbtn2);
-          } else {
-            btn.classList.toggle(setbtn2);
-          }
-        });
-        console.log(flag_trig);
+        if (flag_hyp1 != true) {
+          btnColorHandler(e.target);
+
+          secondStatus(flag_trig);
+        }
         break;
       case "hyp":
-        let shbtn1 = "trigono-h-btn";
-        let shbtn2 = "d-none";
-
-        if (flag_trig == true) {
-          console.log("2nd is one");
-        } else {
-          Array.from(secondTrigoH).map((btn) => {
-            if (btn.classList.contains(shbtn1)) {
-              btn.classList.toggle(shbtn2);
-            } else {
-              btn.classList.toggle(shbtn2);
-            }
-          });
-        }
+        btnColorHandler(e.target);
+        hypstatus(flag_hyp);
         break;
       case "pi":
         intext.value += "π";
+        if (intext.value.length == 1) {
+          result = Math.PI;
+        }
+        break;
+      case "fe":
+        let ex = intext.value;
+        intext.value = parseFloat(ex).toExponential();
+        break;
+      case "e":
+        intext.value += "e";
+        if (intext.value.length == 1) {
+          result = 2.7182;
+        }
+        break;
+      case "erx":
+        intext.value += "e^";
         break;
       case "mod":
-        var m = intext.value;
         intext.value += "%";
         break;
       case "x2":
         let temp = intext.value;
         intext.value += "^2";
-        result = temp ** 2;
+        result = expower(temp, 2);
+        break;
+      case "x3":
+        let temp1 = intext.value;
+        intext.value += "^3";
+        result = expower(temp1, 3);
+        break;
+      case "2rx":
+        intext.value += "2^";
+        break;
+      case "xry":
+        intext.value += "^";
         break;
       case "2sqrt":
         let sq = intext.value;
-        intext.value += "sqrt";
+        // intext.value += "sqrt";
         result = Math.sqrt(sq);
+        break;
+      case "3sqrt":
+        let sq1 = intext.value;
+        // intext.value += "cbrt";
+        result = Math.cbrt(sq1);
         break;
       case "10rx":
         intext.value += "10^";
@@ -135,31 +223,43 @@ for (item of btn) {
         let l = intext.value.length;
         intext.value = intext.value.slice(0, l - 1);
         break;
+      case ".":
+        intext.value += ".";
+        break;
       case "=":
         if (intext.value.includes("!")) {
+          console.log("1");
           intext.value = result;
-        } else if (intext.value.includes("π")) {
-          intext.value = intext.value.replaceAll("π", "3.14");
-        } else if (
-          intext.value.includes("^") &&
-          !(intext.value.includes("+") && intext.value.includes("-"))
-        ) {
+        } else if (intext.value.includes("^")) {
+          console.log("2");
           if (intext.value.includes("10^")) {
-            let pow = parseInt(intext.value.slice(-1));
-            intext.value = 10 ** pow;
-          } else intext.value = result;
+            let pow = intext.value.split("^");
+            intext.value = expower(10, parseInt(pow[1]));
+          } else if (intext.value.includes("e^")) {
+            let newtext = intext.value.replaceAll("e", 2.7182);
+            let pow = newtext.split("^");
+            console.log(pow);
+            intext.value = expower(parseFloat(pow[0]), parseFloat(pow[1]));
+          } else {
+            let arr = intext.value.split("^");
+            intext.value = expower(parseInt(arr[0]), parseInt(arr[1]));
+          }
         } else if (intext.value.includes("log")) {
+          console.log("3");
           let str = intext.value;
           let num = str.match(/(\d+)/);
           intext.value = Math.log10(num[0]);
         } else if (intext.value.includes("ln")) {
+          console.log("4");
           let str = intext.value;
           let num = str.match(/(\d+)/);
           let logvalue = Math.log10(num[0]);
           intext.value = logvalue * 2.303;
-        } else if (intext.value.includes("%")) {
-          let n = parseInt(intext.value.slice(-1));
-          console.log(m, n);
+        } else if (
+          trigoprator.includes(intext.value.replace(/[^A-Za-z]/g, ""))
+        ) {
+          console.log("6");
+          trigohandle(intext.value);
         } else if (
           intext.value.includes("+") ||
           intext.value.includes("-") ||
@@ -168,17 +268,32 @@ for (item of btn) {
           intext.value.includes("^")
         ) {
           //solution;
-          result = calculate(tokenize(intext.value));
+          console.log("7");
+          let newstr = intext.value;
+
+          if (intext.value.includes("π") || intext.value.includes("e")) {
+            let tempstr = intext.value.replaceAll("π", Math.PI);
+            newstr = tempstr.replaceAll("e", 2.7182);
+            console.log(newstr);
+          }
+          result = calculate(tokenize(newstr));
           intext.value = result;
-        } else if (trigoprator.includes(intext.value.slice(0, 3))) {
-          trigohandle(intext.value);
         } else {
+          console.log("8");
+
+          if (intext.value.includes("%")) {
+            let arr = intext.value.split("%");
+            result = arr[0] % arr[1];
+          }
           intext.value = result;
+          result = 0;
         }
         break;
     }
   });
 }
+
+// tokenize the expression
 
 function tokenize(s) {
   const r = [];
@@ -198,9 +313,11 @@ function tokenize(s) {
   if (token !== "") {
     r.push(parseFloat(token));
   }
-  console.log("r", r);
+  console.log(r);
   return r;
 }
+
+//arithmetic calculation area
 
 function calculate(tokens) {
   // --- Perform a calculation expressed as an array of operators and numbers
@@ -417,37 +534,204 @@ function check_unit() {
 
 const trigoprator = [
   "sin",
-  "sin-in",
-  "sin-h",
-  "sin-h-in",
+  "sinin",
+  "sinh",
+  "sinhin",
   "cos",
-  "cos-in",
-  "cos-h",
-  "cos-h-in",
+  "cosin",
+  "cosh",
+  "coshin",
   "tan",
-  "tan-in",
-  "tan-h",
-  "tan-h-in",
+  "tanin",
+  "tanh",
+  "tanhin",
   "sec",
-  "sec-in",
-  "sec-h",
-  "sec-h-in",
-  "cosec",
-  "cosec-in",
-  "cosec-h",
-  "cosec-h-in",
+  "secin",
+  "sech",
+  "sechin",
+  "csc",
+  "cscin",
+  "csch",
+  "cschin",
   "cot",
-  "cot-in",
-  "cot-h",
-  "cot-h-in",
+  "cotin",
+  "coth",
+  "cothin",
 ];
 
+//Check the unit and covert
+
 function trigohandle(inputText) {
-  let str = intext.value;
+  let str = inputText;
+  let trigof = inputText.replace(/[^A-Za-z]/g, "");
   let num = str.match(/(\d+)/);
   let value = num[0];
+  value = covertUnit(value);
+  console.log("value:", value);
+  handleTrigoFunction(str, value);
+}
+
+function covertUnit(value) {
   if (obj["deg"] == "true") {
-    value = value * 0.0174533;
-    console.log(value);
+    value = (value * Math.PI) / 180;
+    console.log("Deg to radian", value);
+    return value;
+  } else if (obj["grad"] == "true") {
+    value = value * 0.015708;
+    console.log("grad to radian", value);
+    return value;
+  } else {
+    return value;
   }
+}
+
+function handleTrigoFunction(text, value) {
+  let x = text.replace(/[^A-Za-z]/g, "");
+  if (text.match(/^sin/i)) {
+    handleSin(x, value);
+  } else if (text.match(/^cos/i)) {
+    handleCos(x, value);
+  } else if (text.match(/^tan/i)) {
+    handleTan(x, value);
+  } else if (text.match(/^sec/i)) {
+    handleSec(x, value);
+  } else if (text.match(/^csc/i)) {
+    handleCosec(x, value);
+  } else if (text.match(/^cot/i)) {
+    handleCot(x, value);
+  }
+}
+
+// Sin Handler
+
+function handleSin(text, value) {
+  switch (text) {
+    case "sin":
+      console.log("sin");
+      intext.value = Math.sin(value);
+      break;
+    case "sinin":
+      console.log("sin in");
+      intext.value = Math.asin(value);
+      break;
+    case "sinh":
+      console.log("sin h");
+      intext.value = Math.sinh(value);
+      break;
+    case "sinhin":
+      console.log("sin h in");
+      intext.value = Math.asinh(value);
+      break;
+  }
+}
+//Cos Handler
+function handleCos(text, value) {
+  switch (text) {
+    case "cos":
+      console.log("cos");
+      intext.value = Math.cos(value);
+      break;
+    case "cosin":
+      console.log("cos in");
+      intext.value = Math.acos(value);
+      break;
+    case "cosh":
+      console.log("cos h");
+      intext.value = Math.cosh(value);
+      break;
+    case "coshin":
+      console.log("cos h in");
+      intext.value = Math.acosh(value);
+      break;
+  }
+}
+//Tan handler
+function handleTan(text, value) {
+  switch (text) {
+    case "tan":
+      console.log("tan");
+      intext.value = Math.round(Math.tan(value));
+      break;
+    case "tanin":
+      console.log("tan in");
+      intext.value = Math.atan(value);
+      break;
+    case "tanh":
+      console.log("tan h");
+      intext.value = Math.tanh(value);
+      break;
+    case "tanhin":
+      console.log("tan h in");
+      intext.value = Math.atanh(value);
+      break;
+  }
+}
+//Sec handler
+function handleSec(text, value) {
+  switch (text) {
+    case "sec":
+      console.log("sec");
+      intext.value = 1 / Math.cos(value);
+      break;
+    case "secin":
+      console.log("sec in");
+      intext.value = 1 / Math.acos(value);
+      break;
+    case "sech":
+      console.log("sec h");
+      intext.value = 1 / Math.cosh(value);
+      break;
+    case "sechin":
+      console.log("sec h in");
+      intext.value = 1 / Math.acosh(value);
+      break;
+  }
+}
+//Cosec handler
+function handleCosec(text, value) {
+  switch (text) {
+    case "csc":
+      console.log("cosec");
+      intext.value = 1 / Math.sin(value);
+      break;
+    case "cscin":
+      console.log("cosec in");
+      intext.value = 1 / Math.asin(value);
+      break;
+    case "csch":
+      console.log("cosec h");
+      intext.value = 1 / Math.sinh(value);
+      break;
+    case "cschin":
+      console.log("cosec h in");
+      intext.value = 1 / Math.asinh(value);
+      break;
+  }
+}
+//Cot handler
+function handleCot(text, value) {
+  switch (text) {
+    case "cot":
+      console.log("cot");
+      intext.value = 1 / Math.tan(value);
+      break;
+    case "cotin":
+      console.log("cot in");
+      intext.value = 1 / Math.atan(value);
+      break;
+    case "coth":
+      console.log("cot h");
+      intext.value = 1 / Math.coth(value);
+      break;
+    case "cothin":
+      console.log("cot h in");
+      intext.value = 1 / Math.acoth(value);
+      break;
+  }
+}
+
+//function
+
+function expower(num, pow) {
+  return num ** pow;
 }
