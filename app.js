@@ -1,26 +1,20 @@
+// all btn selector
 const intext = document.querySelector("input");
-
 const btn = document.querySelectorAll(".btn");
-
 const numBtn = document.querySelectorAll(".num-btn");
-
 const secondBtn = document.getElementsByClassName("2nd-btn-toggle");
-
 const secondTrigo = document.getElementsByClassName("trigono-btn");
-
 const secondTrigoH = document.getElementsByClassName("trigono-h-btn");
-
 const secondTrigoHinv = document.getElementsByClassName("trigono-h-inv");
-
 const arithBtn = document.getElementsByClassName("arith-btn");
-
 const unit_text = document.getElementById("unit");
-
 const tbtn = document.getElementsByClassName("t-btn");
 
-let result = 0;
+// all global variable
 
-let flag_trig = false,
+let result = 0,
+  msarr = [],
+  flag_trig = false,
   flag_hyp = false,
   flag_hyp1 = false;
 
@@ -119,15 +113,125 @@ function hypstatus(statue) {
   }
 }
 
+//memery button setter
+
+function enableMemoryBtn() {
+  let mnum = parseInt(localStorage.getItem("storenum"));
+  let msnum = localStorage.getItem("numberStore");
+  let mcbtn = document.getElementById("mc");
+  let mrbtn = document.getElementById("mr");
+
+  if (mnum == 0 && msnum == "") {
+    mcbtn.disabled = true;
+    mrbtn.disabled = true;
+  } else {
+    mcbtn.disabled = false;
+    mrbtn.disabled = false;
+  }
+}
+
+enableMemoryBtn();
+
 // main loop
 
 for (item of btn) {
   item.addEventListener("click", (e) => {
     let btnId = e.target.id;
     switch (btnId) {
-      case "clear":
-        intext.value = "";
+      //DEG
+      case "unit":
+        check_unit();
         break;
+      // F-E
+      case "fe":
+        let ex = intext.value;
+        intext.value = parseFloat(ex).toExponential();
+        break;
+      //MC
+      case "mc":
+        localStorage.setItem("numberStore", []);
+        localStorage.setItem("storenum", 0);
+        msarr = [];
+        enableMemoryBtn();
+        break;
+      //MR
+      case "mr":
+        let mr = parseFloat(localStorage.getItem("storenum"));
+        intext.value = mr;
+        break;
+      //M+
+      case "m+":
+        let cur = parseInt(localStorage.getItem("storenum"));
+        let add = parseInt(intext.value);
+        localStorage.setItem("storenum", cur + add);
+        enableMemoryBtn();
+        break;
+      //M-
+      case "m-":
+        let curnum = parseInt(intext.value);
+        let sup = parseInt(localStorage.getItem("storenum")) - curnum;
+        localStorage.setItem("storenum", sup);
+        break;
+      //MS
+      case "ms":
+        msarr.push(intext.value);
+        localStorage.setItem("numberStore", msarr);
+        enableMemoryBtn();
+        break;
+      // Trigonometry 2nd btn
+      case "second-fn-Trigono":
+        if (flag_hyp1 != true) {
+          btnColorHandler(e.target);
+
+          secondStatus(flag_trig);
+        }
+        break;
+      // Trigonometry hyp btn
+      case "hyp":
+        btnColorHandler(e.target);
+        hypstatus(flag_hyp);
+        break;
+      // Function |x|
+      case "fmodx":
+        let neg2 = parseFloat(intext.value);
+        if (neg2 < 0) {
+          intext.value = 0 - neg2;
+        }
+        break;
+      // Function ⎣x⎦
+      case "fmodxl":
+        let f = parseFloat(intext.value);
+        intext.value = Math.floor(f);
+        break;
+      // Function ⎡x⎤
+      case "fmodxu":
+        let c = parseFloat(intext.value);
+        intext.value = Math.ceil(c);
+        break;
+      // Function rand
+      case "frand":
+        break;
+      // Function dms
+      case "fdms":
+        if (obj.deg == "true") {
+          let dd = parseFloat(intext.value);
+          let d = parseInt(dd);
+          let m = Math.round((dd - d) * 60);
+          let s = Math.round((dd - d - m / 60) * 3600);
+          intext.value = d + ":" + m + ":" + s;
+        }
+        break;
+      // Function deg
+      case "fdeg":
+        if (obj.deg == "true") {
+          return;
+        } else if (obj.rad == "true") {
+          let rvalue = parseFloat(intext.value);
+          let ans = rvalue * (180 / Math.PI);
+          intext.value = ans.toFixed(4);
+        }
+        break;
+      //2nd btn
       case "2nd":
         btnColorHandler(e.target);
         let secBtn1 = "2nd-btn-1";
@@ -140,94 +244,127 @@ for (item of btn) {
           }
         });
         break;
-      case "second-fn-Trigono":
-        if (flag_hyp1 != true) {
-          btnColorHandler(e.target);
-
-          secondStatus(flag_trig);
-        }
-        break;
-      case "hyp":
-        btnColorHandler(e.target);
-        hypstatus(flag_hyp);
-        break;
+      // pi btn
       case "pi":
         intext.value += "π";
         if (intext.value.length == 1) {
           result = Math.PI;
         }
         break;
-      case "fe":
-        let ex = intext.value;
-        intext.value = parseFloat(ex).toExponential();
-        break;
+      // e btn
       case "e":
         intext.value += "e";
         if (intext.value.length == 1) {
           result = 2.7182;
         }
         break;
-      case "erx":
-        intext.value += "e^";
+      // C
+      case "clear":
+        intext.value = "";
         break;
-      case "mod":
-        intext.value += "%";
+      // delete
+      case "del":
+        let l = intext.value.length;
+        intext.value = intext.value.slice(0, l - 1);
         break;
+      // x^2
       case "x2":
         let temp = intext.value;
         intext.value += "^2";
         result = expower(temp, 2);
         break;
+      // x^3
       case "x3":
         let temp1 = intext.value;
         intext.value += "^3";
         result = expower(temp1, 3);
         break;
-      case "2rx":
-        intext.value += "2^";
+      // 1/x
+      case "1/x":
+        intext.value += "1/";
         break;
-      case "xry":
-        intext.value += "^";
+      // |x|
+      case "modx":
+        let neg = parseFloat(intext.value);
+        if (neg < 0) {
+          intext.value = 0 - neg;
+        }
         break;
+      // exp
+      case "exp":
+        let ex1 = intext.value;
+        intext.value = parseFloat(ex1).toExponential();
+        break;
+      // mod
+      case "mod":
+        intext.value += "%";
+        break;
+      // 2sqrt x
       case "2sqrt":
         let sq = intext.value;
-        // intext.value += "sqrt";
         result = Math.sqrt(sq);
         break;
+      // 3sqrt x
       case "3sqrt":
         let sq1 = intext.value;
-        // intext.value += "cbrt";
         result = Math.cbrt(sq1);
         break;
-      case "10rx":
-        intext.value += "10^";
-        break;
-      case "unit":
-        check_unit();
-        break;
-      case "log":
-        intext.value += "log";
-        break;
-      case "ln":
-        intext.value += "ln";
-        break;
+      // factorial
       case "fact":
         let newinput = intext.value;
         intext.value += "!";
         result = factorial(newinput);
         break;
-      case "1/x":
-        intext.value += "1/";
+      // x^y
+      case "xry":
+        intext.value += "^";
         break;
-      case "rl":
-        let l = intext.value.length;
-        intext.value = intext.value.slice(0, l - 1);
+      // ysqrt x
+      case "ysqrtx":
+        intext.value += "rt";
         break;
+      // 10^x
+      case "10rx":
+        intext.value += "10^";
+        break;
+      // 2^x
+      case "2rx":
+        intext.value += "2^";
+        break;
+      //log
+      case "log":
+        intext.value += "log";
+        break;
+      //log base y (x)
+      case "logbyx":
+        intext.value += "logb";
+        break;
+      //ln
+      case "ln":
+        intext.value += "ln";
+        break;
+      //e^x
+      case "erx":
+        intext.value += "e^";
+        break;
+      // +/-
+      case "postoneg":
+        let neg1 = parseFloat(intext.value);
+        if (neg1 < 0) {
+          intext.value = 0 - neg1;
+        } else {
+          intext.value = 0 - neg1;
+        }
+        break;
+      // .
       case ".":
         intext.value += ".";
         break;
+      // =
       case "=":
-        if (intext.value.includes("!")) {
+        if (intext.value.length == 0) {
+          return;
+        } else if (intext.value.includes("!")) {
           console.log("1");
           intext.value = result;
         } else if (intext.value.includes("^")) {
@@ -244,13 +381,25 @@ for (item of btn) {
             let arr = intext.value.split("^");
             intext.value = expower(parseInt(arr[0]), parseInt(arr[1]));
           }
-        } else if (intext.value.includes("log")) {
+        } else if (intext.value.includes("logb")) {
           console.log("3");
+          let logarr = intext.value.split("logb");
+          let logb = logarr[0];
+          let logx = logarr[1];
+          intext.value = Math.log(logx) / Math.log(logb);
+        } else if (intext.value.includes("log")) {
+          console.log("4");
           let str = intext.value;
           let num = str.match(/(\d+)/);
           intext.value = Math.log10(num[0]);
+        } else if (intext.value.includes("rt")) {
+          console.log("5");
+          let rt = intext.value.split("rt");
+          let base = parseInt(rt[1]);
+          let root = parseInt(rt[0]);
+          intext.value = Math.pow(base, 1 / root);
         } else if (intext.value.includes("ln")) {
-          console.log("4");
+          console.log("6");
           let str = intext.value;
           let num = str.match(/(\d+)/);
           let logvalue = Math.log10(num[0]);
@@ -258,7 +407,7 @@ for (item of btn) {
         } else if (
           trigoprator.includes(intext.value.replace(/[^A-Za-z]/g, ""))
         ) {
-          console.log("6");
+          console.log("7");
           trigohandle(intext.value);
         } else if (
           intext.value.includes("+") ||
@@ -268,18 +417,40 @@ for (item of btn) {
           intext.value.includes("^")
         ) {
           //solution;
-          console.log("7");
+          console.log("8");
           let newstr = intext.value;
 
-          if (intext.value.includes("π") || intext.value.includes("e")) {
-            let tempstr = intext.value.replaceAll("π", Math.PI);
-            newstr = tempstr.replaceAll("e", 2.7182);
-            console.log(newstr);
+          //index of bracket
+          if (intext.value.includes("(")) {
+            let teststr = intext.value;
+            let numofb = countNumberOfBacket(intext.value);
+
+            if (teststr.includes("π") || teststr.includes("e")) {
+              let tempstr = teststr.replaceAll("π", Math.PI);
+              teststr = tempstr.replaceAll("e", 2.7182);
+            }
+
+            let valueofb = cal_bracket(teststr);
+            let pretext,
+              j = 0;
+            for (i = 0; i < numofb; i++) {
+              pretext = teststr.replace(/\(.*?\)/, valueofb[j]);
+              teststr = pretext;
+              j++;
+            }
+            newstr = pretext;
           }
+
+          if (newstr.includes("π") || newstr.includes("e")) {
+            let tempstr = newstr.replaceAll("π", Math.PI);
+            newstr = tempstr.replaceAll("e", 2.7182);
+          }
+
+          console.log("newstr:", newstr);
           result = calculate(tokenize(newstr));
           intext.value = result;
         } else {
-          console.log("8");
+          console.log("9");
 
           if (intext.value.includes("%")) {
             let arr = intext.value.split("%");
@@ -299,7 +470,7 @@ function tokenize(s) {
   const r = [];
   let token = "";
   for (const character of s) {
-    if ("^*/+-".includes(character)) {
+    if ("^*/+-()".includes(character)) {
       if (token === "" && character === "-") {
         token = "-";
       } else {
@@ -313,7 +484,6 @@ function tokenize(s) {
   if (token !== "") {
     r.push(parseFloat(token));
   }
-  console.log(r);
   return r;
 }
 
@@ -730,8 +900,41 @@ function handleCot(text, value) {
   }
 }
 
-//function
-
+//function power
 function expower(num, pow) {
   return num ** pow;
+}
+
+//let newtext=text.replace(/\(.*?\)/,5);
+
+//function of no of bracket
+function countNumberOfBacket(text) {
+  let coun = 0;
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] == "(") {
+      coun++;
+    }
+  }
+  return coun;
+}
+
+//function calculate bracket
+
+function cal_bracket(text) {
+  let index,
+    solutionofB = [];
+  let out = calculate(tokenize(text));
+  console.log("out:", out);
+  for (let i in out) {
+    if (out[i] == "(") {
+      index = i;
+      while (out[index] != ")") {
+        if (out[index] != "(") {
+          solutionofB.push(out[index]);
+        }
+        index++;
+      }
+    }
+  }
+  return solutionofB;
 }
