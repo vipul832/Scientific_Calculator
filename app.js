@@ -363,9 +363,9 @@ for (item of btn) {
         }
         break;
       // .
-      case ".":
-        intext.value += ".";
-        break;
+      // case "dot":
+      //   intext.value += ".";
+      //   break;
       // =
       case "=":
         if (intext.value.length == 0) {
