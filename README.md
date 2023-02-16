@@ -58,4 +58,4 @@ Project challenging and intresting we have not use eval() of javascipt.
   - deg will convert you input into degress
 
 ## ScreenShot
-![](https://www.linkpicture.com/view.php?img=LPic63edeef07fe381591372795)
+![](https://www.linkpicture.com/q/Screenshot-from-2023-02-16-14-21-28.png)
