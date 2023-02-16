@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>remote calculator</title>
     <link rel="shortcut icon" href="./icons/favicon.png" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
 <!--Bootstrap css-->
 
     <link
@@ -18,6 +23,9 @@
 <!--General css-->
 
     <style>
+      *{
+        font-family: 'Roboto', sans-serif;
+      }
       .btn{
         border-radius: 0 !important;
       }
@@ -33,10 +41,10 @@
       class="container d-flex justify-content-center min-vh-100 align-items-center border-dark"
     >
       <div
-        class="cal p-2 pt-2 bg-light shadow-lg border border-secondary"
-        style="width: 24rem; height: 37rem"
+        class="cal  bg-light shadow-lg border border-secondary"
+        style="width: 23rem; height: 36rem"
       >
-         <div class="col justify-content-start p-1">
+         <div class="col justify-content-start p-1 pb-1">
 
           <p class="m-0">Scientific Calculator</p>
 
@@ -45,46 +53,46 @@
             <div class="col">
               <input
                 type="text"
-                class="form-control fs-1 fw-medium text-end bg-light border-0 shadow-none" id="intext"
+                class="form-control fs-1 fw-bold text-end bg-light border-0 shadow-none" id="intext"
                 />
             </div>
           </div>
   
           <!--Second Row-->
           <div class="row w-75 gap-1 mt-2 ms-1 justify-content-start">
-            <div class="btn col-3 p-2 btn-light px-3" id="unit">
+            <div class="btn col-3 fw-bold p-2 btn-light px-3" id="unit">
               DEG
             </div>
-            <div class="btn col-3 p-2   btn-light" id="fe">
+            <div class="btn col-3 p-2 fw-bold btn-light" id="fe">
               F-E
             </div>
           </div>
   
           <!--Third Row-->
           <div class="row mt-2 justify-content-center gap-1">
-            <button class="btn col-2 p-2 btn-light fw-medium" id="mc">
+            <button class="btn col-2  fw-bold p-2 btn-light fw-medium" id="mc">
               MC
             </button>
-            <button class="btn col-2 p-2 btn-light fw-medium" id="mr">
+            <button class="btn col-2  fw-bold p-2 btn-light fw-medium" id="mr">
               MR
             </button>
-            <button class="btn col-2 p-2 btn-light fw-medium" id="m+">
+            <button class="btn col-2  fw-bold p-2 btn-light fw-medium" id="m+">
               M +
             </>
-            <button class="btn col-2 p-2 btn-light fw-medium" id="m-">
+            <button class="btn col-2  fw-bold p-2 btn-light fw-medium" id="m-">
               M -
             </button>
-            <button class="btn col-2 p-2 btn-light fw-medium" id="ms">
+            <button class="btn col-2  fw-bold p-2 btn-light fw-medium" id="ms">
               MS
             </button>
           </div>
   
           <!--Fourth Row-->
-          <div class="row mt-1 justify-content-start">
+          <div class="row mt-1  justify-content-evenly">
             <!--trigonometry-->
-            <div class="col-5">
+            <div class="col-5 p-0">
               <div class="dropdown">
-                <button class="btn d-flex align-items-center border-0 " type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                <button class="btn d-flex align-items-center border-0 text-center p-1" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                   <img src="./icons/trigo.png" alt="" width="21px" class="mx-1">
                   Trigonometry
                  <img src="./icons/down-arrow.png" alt="" width="18px" class="mx-1">
@@ -92,85 +100,85 @@
                 <ul class="dropdown-menu p-0 rounded-0">
                   <!--2nd trigonometry area-->
                   <li class="d-flex justify-content-around">
-                    <button class="btn border-0  text-nowrap btn-light" id="second-fn-Trigono">
+                    <button class="btn border-0 col p-2 text-nowrap btn-light" id="second-fn-Trigono">
                       2 <sup>nd</sup>
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigo-btn-1 trigono-h-btn trigono-btn" id="sin">
+                    <button class="btn border-0 col p-2  t-btn btn-light text-nowrap trigo-btn-1 trigono-h-btn trigono-btn" id="sin">
                       sin
                     </button>
-                    <button class="btn border-0 t-btn text-nowrap btn-light trigono-btn  trigono-h-inv d-none" id="sinin">
+                    <button class="btn border-0 col p-2 t-btn text-nowrap btn-light trigono-btn  trigono-h-inv d-none" id="sinin">
                       sin <sup>-1</sup>
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigono-h-inv d-none" id="sinhin">
+                    <button class="btn border-0 col p-2 t-btn btn-light text-nowrap trigono-h-inv d-none" id="sinhin">
                       sinh <sup>-1</sup>
                     </button>
-                    <button class="btn  border-0 t-btn btn-light trigono-h-btn text-nowrap d-none" id="sinh">
+                    <button class="btn  border-0 col p-2 t-btn btn-light trigono-h-btn text-nowrap d-none" id="sinh">
                       sinh
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigo-btn-1 trigono-h-btn trigono-btn" id="cos">
+                    <button class="btn border-0 col p-2  t-btn btn-light text-nowrap trigo-btn-1 trigono-h-btn trigono-btn" id="cos">
                       cos
                     </button>
-                    <button class="btn border-0 t-btn  btn-light text-nowrap trigono-btn trigono-h-inv d-none" id="cosin">
+                    <button class="btn border-0 col p-2 t-btn  btn-light text-nowrap trigono-btn trigono-h-inv d-none" id="cosin">
                       cos <sup>-1</sup>
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigono-h-inv d-none" id="coshin">
+                    <button class="btn border-0 col p-2 t-btn btn-light text-nowrap trigono-h-inv d-none" id="coshin">
                       cosh <sup>-1</sup>
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigono-h-btn d-none" id="cosh">
+                    <button class="btn border-0 col p-2 t-btn btn-light text-nowrap trigono-h-btn d-none" id="cosh">
                       cosh
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigo-btn-1 trigono-h-btn trigono-btn" id="tan">
+                    <button class="btn border-0 col p-2 t-btn btn-light text-nowrap trigo-btn-1 trigono-h-btn trigono-btn" id="tan">
                       tan
                     </button>
-                    <button class="btn border-0 t-btn  btn-light text-nowrap trigono-btn trigono-h-inv d-none" id="tanin">
+                    <button class="btn border-0 col p-2 t-btn  btn-light text-nowrap trigono-btn trigono-h-inv d-none" id="tanin">
                       tan <sup>-1</sup>
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigono-h-inv d-none" id="tanhin">
+                    <button class="btn border-0 col p-2 t-btn btn-light text-nowrap trigono-h-inv d-none" id="tanhin">
                       tanh <sup>-1</sup>
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigono-h-btn d-none" id="tanh">
+                    <button class="btn border-0 col p-2 t-btn btn-light text-nowrap trigono-h-btn d-none" id="tanh">
                       tanh
                     </button>
                   </li>
                   <!--Hyp button area-->
                   <li class="d-flex justify-content-center">
-                    <button class="btn border-0  btn-light text-nowrap" id="hyp">
+                    <button class="btn border-0 col p-2 btn-light text-nowrap" id="hyp">
                       hyp
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigo-btn-1 trigono-h-btn trigono-btn" id="sec">
+                    <button class="btn border-0 col p-2 t-btn btn-light text-nowrap trigo-btn-1 trigono-h-btn trigono-btn" id="sec">
                       sec
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigono-btn trigono-h-inv d-none" id="secin">
+                    <button class="btn border-0 col p-2 t-btn btn-light text-nowrap trigono-btn trigono-h-inv d-none" id="secin">
                       sec <sup>-1</sup>
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigono-h-inv d-none" id="sechin">
+                    <button class="btn border-0 col p-2 t-btn btn-light text-nowrap trigono-h-inv d-none" id="sechin">
                       sech <sup>-1</sup>
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigono-h-btn d-none" id="sech">
+                    <button class="btn border-0 col p-2 t-btn btn-light text-nowrap trigono-h-btn d-none" id="sech">
                       sech
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigo-btn-1 trigono-h-btn trigono-btn" id="csc">
+                    <button class="btn border-0 col p-2 t-btn btn-light text-nowrap trigo-btn-1 trigono-h-btn trigono-btn" id="csc">
                       csc
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigono-btn trigono-h-inv d-none" id="cscin">
+                    <button class="btn border-0 col p-2 t-btn btn-light text-nowrap trigono-btn trigono-h-inv d-none" id="cscin">
                       csc <sup>-1</sup>
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigono-h-inv d-none" id="cschin">
+                    <button class="btn border-0 col p-2 t-btn btn-light text-nowrap trigono-h-inv d-none" id="cschin">
                       csch <sup>-1</sup>
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap text-nowrap  trigono-h-btn d-none" id="csch">
+                    <button class="btn border-0 col p-2 t-btn btn-light text-nowrap text-nowrap  trigono-h-btn d-none" id="csch">
                       csch
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigo-btn-1 trigono-h-btn trigono-btn" id="cot">
+                    <button class="btn border-0 col p-2 col p-2 t-btn btn-light text-nowrap trigo-btn-1 trigono-h-btn trigono-btn" id="cot">
                       cot
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigono-btn trigono-h-inv d-none" id="cotin">
+                    <button class="btn border-0 col p-2 t-btn btn-light text-nowrap trigono-btn trigono-h-inv d-none" id="cotin">
                       cot <sup>-1</sup>
                     </button>
-                    <button class="btn  border-0 t-btn btn-light text-nowrap trigono-h-inv d-none" id="cothin">
+                    <button class="btn  border-0 col p-2 t-btn btn-light text-nowrap trigono-h-inv d-none" id="cothin">
                       coth <sup>-1</sup>
                     </button>
-                    <button class="btn border-0 t-btn btn-light text-nowrap trigono-h-btn d-none" id="coth">
+                    <button class="btn border-0 col p-2 t-btn btn-light text-nowrap trigono-h-btn d-none" id="coth">
                       coth
                     </button>
                   </li>
@@ -180,23 +188,23 @@
             </div>
 
             <!--function-->
-            <div class="col-5">
+            <div class="col-5 p-0">
               <div class="dropdown">
-                <button class="btn d-flex align-items-center border-0 " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn d-flex align-items-center border-0 p-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <img src="./icons/function.png" alt="" height="20px" class="mx-1">
                   Function
                  <img src="./icons/down-arrow.png" alt="" width="18px" class="mx-1">
                 </button>
                 <div class="dropdown-menu p-0 rounded-0">
-                  <div class="d-flex ">
-                    <button class="btn col btn-light rounded-0" id="fmodx">|x|</button>
-                    <button class="btn col btn-light rounded-0" id="fmodxl">⎣x⎦</button>
-                    <button class="btn col  btn-light rounded-0" id="fmodxu">⎡x⎤</button>
+                  <div class="d-flex">
+                    <button class="btn col text-nowrap btn-light rounded-0" id="fmodx">|x|</button>
+                    <button class="btn col text-nowrap btn-light rounded-0" id="fmodxl">⎣x⎦</button>
+                    <button class="btn col text-nowrap  btn-light rounded-0" id="fmodxu">⎡x⎤</button>
                   </div>
-                  <div class="d-flex ">
-                    <button class="btn  btn-light rounded-0" id="frand" >rand</button>
-                    <button class="btn  btn-light rounded-0" id="fdms">&#8594;dms</button>
-                    <button class="btn   btn-light rounded-0" id="fdeg">&#8594;deg</button>
+                  <div class="d-flex">
+                    <button class="btn p-0  py-2 col text-nowrap btn-light rounded-0" id="frand" >rand</button>
+                    <button class="btn p-0 py-2 col text-nowrap btn-light rounded-0" id="fdms">&#8594;dms</button>
+                    <button class="btn p-0 py-2 col text-nowrap btn-light rounded-0" id="fdeg">&#8594;deg</button>
                   </div>
                 </div>
               </div>
@@ -265,7 +273,7 @@
             <div class="btn col-2 p-2  shadow      btn-light" id="fact"  >
              n!
             </div>
-            <div class="btn col-2 p-2  shadow  arith-btn    btn-light" id="/"  >
+            <div class="btn col-2 p-2  shadow  arith-btn btn-light " id="/"  >
               <img src="./icons/divide.png" alt="divide" width="25px">
             </div>
           </div>
@@ -279,16 +287,16 @@
             <div class="btn col-2 p-2 2nd-btn-2  shadow  d-none 2nd-btn-toggle   btn-light" id="ysqrtx">
               <span>y&#8730x</span>
             </div>
-            <div class="btn num-btn col-2 p-2   shadow     btn-light fw-bold" id="7"  >
+            <div class="btn num-btn col-2 p-2   shadow fw-bold    btn-light fw-bold" id="7"  >
               7
             </div>
-            <div class="btn num-btn col-2 p-2   shadow     btn-light fw-bold" id="8"  >
+            <div class="btn num-btn col-2 p-2   shadow   fw-bold   btn-light fw-bold" id="8"  >
               8
             </div>
-            <div class="btn num-btn col-2 p-2   shadow     btn-light fw-bold" id="9"  >
+            <div class="btn num-btn col-2 p-2   shadow  fw-bold    btn-light fw-bold" id="9"  >
              9
             </div>
-            <div class="btn col-2 p-2   shadow arith-btn    btn-light" id="*"  >
+            <div class="btn col-2 p-2   shadow arith-btn btn-light  " id="*"  >
              X
             </div>
           </div>
@@ -302,16 +310,16 @@
             <div class="btn col-2 p-2 2nd-btn-2  shadow 2nd-btn-toggle  d-none   btn-light" id="2rx">
               <span>2<sup>x</sup></span>
             </div>
-            <div class="btn num-btn col-2 p-2   shadow     btn-light fw-bold" id="4"   >
+            <div class="btn num-btn col-2 p-2   shadow   fw-bold   btn-light fw-bold" id="4"   >
               4
             </div>
-            <div class="btn num-btn col-2 p-2    shadow    btn-light fw-bold" id="5"  >
+            <div class="btn num-btn col-2 p-2    shadow   fw-bold  btn-light fw-bold" id="5"  >
               5
             </div>
-            <div class="btn num-btn col-2 p-2   shadow     btn-light fw-bold" id="6"  >
+            <div class="btn num-btn col-2 p-2   shadow  fw-bold    btn-light fw-bold" id="6"  >
               6
             </div>
-            <div class="btn col-2 p-2  shadow  arith-btn   btn-light" id="-"  >
+            <div class="btn col-2 p-2  shadow  arith-btn btn-light " id="-"  >
               -
             </div>
           </div>
@@ -325,16 +333,16 @@
             <div class="btn col-2 p-2  2nd-btn-2 shadow  d-none  2nd-btn-toggle  btn-light" id="logbyx">
               log<sub>y</sub>X
             </div>
-            <div class="btn num-btn col-2 p-2   shadow     btn-light fw-bold" id="1"  >
+            <div class="btn num-btn col-2 p-2   shadow  fw-bold    btn-light fw-bold" id="1"  >
               1
             </div>
-            <div class="btn num-btn col-2 p-2  shadow      btn-light fw-bold" id="2"  >
+            <div class="btn num-btn col-2 p-2  shadow   fw-bold    btn-light fw-bold" id="2"  >
               2
             </div>
-            <div class="btn num-btn col-2 p-2   shadow     btn-light fw-bold" id="3"  >
+            <div class="btn num-btn col-2 p-2   shadow  fw-bold    btn-light fw-bold" id="3"  >
               3
             </div>
-            <div class="btn col-2 p-2  shadow arith-btn     btn-light" id="+"  >
+            <div class="btn col-2 p-2  shadow arith-btn btn-light" id="+"  >
              +
             </div>
           </div>
@@ -348,13 +356,13 @@
             <div class="btn col-2 p-2  2nd-btn-2  shadow  d-none 2nd-btn-toggle  btn-light" id="erx" >
              e<sup>x</sup>
             </div>
-            <div class="btn col-2 p-2   shadow     btn-light" id="postoneg">
+            <div class="btn col-2 p-2  num-btn shadow  fw-bold     btn-light" id="postoneg">
              +/-
             </div>
-            <div class="btn num-btn col-2 p-2   shadow     btn-light fw-bold" id="0"  >
+            <div class="btn num-btn col-2 p-2  fw-bold   shadow  btn-light fw-bold" id="0"  >
               0
             </div>
-            <div class="btn col-2 p-2   shadow     btn-light" id=".">
+            <div class="btn col-2 p-2 num-btn  shadow   fw-bold    btn-light" id=".">
              .
             </div>
             <div class="btn active col-2 p-2   shadow     btn-primary" id="=">
