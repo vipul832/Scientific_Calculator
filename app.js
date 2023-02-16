@@ -298,8 +298,7 @@ for (item of btn) {
         break;
       // exp
       case "exp":
-        let ex1 = intext.value;
-        intext.value = parseFloat(ex1).toExponential();
+        intext.value += "e+";
         break;
       // mod
       case "mod":
@@ -415,6 +414,11 @@ for (item of btn) {
         ) {
           console.log("7");
           trigohandle(intext.value);
+        } else if (intext.value.match(/^(\d+)e+/)) {
+          console.log("8");
+          let expf = intext.value;
+          let exparr = expf.split("e+");
+          intext.value = exparr[0] * Math.pow(10, exparr[1]);
         } else if (
           intext.value.includes("+") ||
           intext.value.includes("-") ||
@@ -423,7 +427,7 @@ for (item of btn) {
           intext.value.includes("^")
         ) {
           //solution;
-          console.log("8");
+          console.log("9");
           let newstr = intext.value;
 
           //index of bracket
@@ -456,7 +460,7 @@ for (item of btn) {
           result = calculate(tokenize(newstr));
           intext.value = result;
         } else {
-          console.log("9");
+          console.log("10");
 
           if (intext.value.includes("%")) {
             let arr = intext.value.split("%");
