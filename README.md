@@ -62,6 +62,9 @@ Project challenging and intresting we have not use eval() of javascipt.
   - To use Inverse click on **"2nd"** button and for hyperbolic function click **"hyp"** button.
   - If you want ous sinh inverse first click on 2nd button and then click on **"hyp"** button so you will get.
   - For Unit change just click on **"DEG"** it and set as per you requirement.
+  - You Minght get confuse in sin invers and sin h inverse display on screen.
+      - **"sinin" = "sin^-1"**
+      - **"sinhin" = "sinh^-1"**
   ### Flow of Trigonometry:
   - First click button then type the degree/radina/grad value and then click **"="** button.
   
@@ -78,7 +81,7 @@ Project challenging and intresting we have not use eval() of javascipt.
    - In **"square root" , "cube root","x^3" and "x^2"**  you have first type the number and then click on operation button but you will see there is no answer on screen hmmm wait just click on "=" button and there you go you will get you answer.
    
       - **step:1** Enter the number.
-      - **step:2** Click on "squar root " / "cube root" / "x^2.
+      - **step:2** Click on "squar root " / "cube root" / "x^2/ "x^3".
       - **step:3** Then Click on "=" for answer.
     
    - For **"10^x","log","ln","1/x","2^x","e^x","n!"** here you have to first click on button and then enter the number. For answer click on "=" button.
