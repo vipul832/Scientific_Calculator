@@ -144,8 +144,12 @@ for (item of btn) {
         break;
       // F-E
       case "fe":
+        if (intext.value.length == 0) {
+          return;
+        }
         let ex = intext.value;
         intext.value = parseFloat(ex).toExponential();
+
         break;
       //MC
       case "mc":
@@ -275,12 +279,18 @@ for (item of btn) {
         break;
       // x^2
       case "x2":
+        if (intext.value.length == 0) {
+          return;
+        }
         let temp = intext.value;
         intext.value += "^2";
         result = expower(temp, 2);
         break;
       // x^3
       case "x3":
+        if (intext.value.length == 0) {
+          return;
+        }
         let temp1 = intext.value;
         intext.value += "^3";
         result = expower(temp1, 3);
@@ -322,6 +332,9 @@ for (item of btn) {
         break;
       // x^y
       case "xry":
+        if (intext.value.length == 0) {
+          return;
+        }
         intext.value += "^";
         break;
       // ysqrt x
