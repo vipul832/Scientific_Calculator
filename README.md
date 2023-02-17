@@ -95,8 +95,7 @@ Project challenging and intresting we have not use eval() of javascipt.
 ## ScreenShot
 ![](https://www.linkpicture.com/q/Screenshot-from-2023-02-16-14-21-28.png)
 
-## Demo Video
-https://user-images.githubusercontent.com/122255127/219652914-c4ea4a4e-eda3-440b-8a77-f72ab3eb63b4.mp4
+
 
 ## Check Live
 - [Scientific Calculator](https://vipulc8.github.io/Scientific_Calculator/)
